@@ -34,10 +34,13 @@ function startQuiz(level) {
 
 function loadQuestion() {
   document.getElementById('feedback').innerText = "";
+  document.getElementById('nextBtn').style.display = "none";
+
   const q = currentQuiz[currentIndex];
   document.getElementById('question').innerText = q.q;
   const answers = document.getElementById('answers');
   answers.innerHTML = "";
+
   q.a.forEach((text, i) => {
     const b = document.createElement('button');
     b.innerText = text;
@@ -52,12 +55,16 @@ function selectAnswer(i) {
   document.querySelectorAll('.answer')[q.c].classList.add('correct');
   document.getElementById('feedback').innerText =
     i === q.c ? "Gut gemacht 💕" : "blame it on memory loss";
-  setTimeout(() => {
-    currentIndex++;
-    currentIndex >= currentQuiz.length ? showScreen('result') : loadQuestion();
-  }, 1500);
+  document.getElementById('nextBtn').style.display = "inline-block";
 }
 
+function nextQuestion() {
+  currentIndex++;
+  document.getElementById('nextBtn').style.display = "none";
+  currentIndex >= currentQuiz.length ? showScreen('result') : loadQuestion();
+}
+
+/* ❤️ Schreibmaschine + Herz-Explosion + Vibration */
 const loveText = "Ich liebe dich Maus <3";
 let typeIndex = 0;
 
@@ -65,8 +72,33 @@ function startTypewriter() {
   const el = document.getElementById("typewriter");
   el.innerText = "";
   typeIndex = 0;
-  const i = setInterval(() => {
+
+  const interval = setInterval(() => {
     el.innerText += loveText[typeIndex++];
-    if (typeIndex >= loveText.length) clearInterval(i);
+    if (typeIndex >= loveText.length) {
+      clearInterval(interval);
+      explodeHearts();
+      vibrateLove();
+    }
   }, 120);
+}
+
+function explodeHearts() {
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+    heart.style.left = "50%";
+    heart.style.top = "50%";
+    heart.style.setProperty("--x", `${(Math.random() - 0.5) * 400}px`);
+    heart.style.setProperty("--y", `${(Math.random() - 0.5) * 400}px`);
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }
+}
+
+function vibrateLove() {
+  if ("vibrate" in navigator) {
+    navigator.vibrate([200, 150, 200]); // ❤️ bzz — pause — bzz
+  }
 }
