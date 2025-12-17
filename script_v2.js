@@ -99,7 +99,7 @@ function showLevelComplete() {
     btn.onclick = () => startQuiz("hard");
   } else {
     text.innerText = "Hefty Zesty überlebt 🌶️";
-    btn.innerText = "Goo Job 🧚‍♀️";
+    btn.innerText = "Good Job 🧚‍♀️";
     btn.onclick = () => showScreen("love");
   }
 
