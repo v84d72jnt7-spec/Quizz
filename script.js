@@ -105,7 +105,7 @@ function selectAnswer(i) {
   buttons[q.c].classList.add('correct');
 
   document.getElementById('feedback').innerText =
-    i === q.c ? "Gut gemacht 💕" : "blame it on memory loss";
+    i === q.c ? "Very well indeed 🤌🏻" : "blame it on memory loss";
 
   document.getElementById('nextBtn').style.display = "inline-block";
 }
