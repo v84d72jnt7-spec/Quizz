@@ -65,7 +65,7 @@ function selectAnswer(i) {
 
   buttons[q.c].classList.add('correct');
   document.getElementById('feedback').innerText =
-    i === q.c ? "Gut gemacht 💕" : "blame it on memory loss";
+    i === q.c ? "Very well indeed 🤌🏻" : "blame it on memory loss";
 
   document.getElementById('nextBtn').style.display = "inline-block";
 }
@@ -86,22 +86,20 @@ function showLevelComplete() {
   const result = document.getElementById('result');
   result.innerHTML = "";
 
-  let text = document.createElement("h2");
-  let btn = document.createElement("button");
+  const text = document.createElement("h2");
+  const btn = document.createElement("button");
 
   if (currentLevel === "easy") {
     text.innerText = "Easy Lemon gemeistert 🍋";
     btn.innerText = "Weiter zu Medium 💕";
     btn.onclick = () => startQuiz("medium");
-  }
-  else if (currentLevel === "medium") {
+  } else if (currentLevel === "medium") {
     text.innerText = "Medium Squeezy bezwungen 🍊";
     btn.innerText = "Weiter zu Hefty Zesty 🔥";
     btn.onclick = () => startQuiz("hard");
-  }
-  else {
+  } else {
     text.innerText = "Hefty Zesty überlebt 🌶️";
-    btn.innerText = "Zum Finale 💖";
+    btn.innerText = "Goo Job 🧚‍♀️";
     btn.onclick = () => showScreen("love");
   }
 
@@ -110,7 +108,7 @@ function showLevelComplete() {
   showScreen("result");
 }
 
-/* ❤️ Schreibmaschine + Herz + Vibration */
+/* ❤️ Schreibmaschine + Maus-Explosion + Vibration */
 const loveText = "Ich liebe dich Maus <3";
 let typeIndex = 0;
 
@@ -123,23 +121,23 @@ function startTypewriter() {
     el.innerText += loveText[typeIndex++];
     if (typeIndex >= loveText.length) {
       clearInterval(interval);
-      explodeHearts();
+      explodeMice();
       vibrateLove();
     }
   }, 120);
 }
 
-function explodeHearts() {
+function explodeMice() {
   for (let i = 0; i < 20; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "💖";
-    heart.style.left = "50%";
-    heart.style.top = "50%";
-    heart.style.setProperty("--x", `${(Math.random() - 0.5) * 400}px`);
-    heart.style.setProperty("--y", `${(Math.random() - 0.5) * 400}px`);
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
+    const mouse = document.createElement("div");
+    mouse.className = "heart"; // nutzt die gleiche Animation
+    mouse.innerText = "🐁";
+    mouse.style.left = "50%";
+    mouse.style.top = "50%";
+    mouse.style.setProperty("--x", `${(Math.random() - 0.5) * 400}px`);
+    mouse.style.setProperty("--y", `${(Math.random() - 0.5) * 400}px`);
+    document.body.appendChild(mouse);
+    setTimeout(() => mouse.remove(), 2000);
   }
 }
 
