@@ -3,19 +3,66 @@ let currentIndex = 0;
 
 const quizzes = {
   easy: [
-    { q: "Lieblingsfarbe der Maus", a: ["Jungblau", "Mature Maron", "Altrosa"], c: 2 },
-    { q: "First Kiss Spot", a: ["Hinter der Bräurosl", "Auf der Bräurosl", "In der Bräurosl"], c: 0 },
-    { q: "Was beeindruckt Mr Masu?", a: ["Springreiten", "Liebe für Rotwein", "langsam schlendernde Menschen"], c: 1 }
+    {
+      q: "Lieblingsfarbe der Maus",
+      a: ["Jungblau", "Mature Maron", "Altrosa"],
+      c: 2
+    },
+    {
+      q: "First Kiss Spot",
+      a: ["Hinter der Bräurosl", "Auf der Bräurosl", "In der Bräurosl"],
+      c: 0
+    },
+    {
+      q: "Was beeindruckt Mr Masu?",
+      a: ["Springreiten", "Liebe für Rotwein", "langsam schlendernde Menschen"],
+      c: 1
+    }
   ],
+
   medium: [
-    { q: "Wie heißt die Station an der wir zum ersten Mal zusammen U-Bahn gefahren sind?", a: ["Schillerstraße", "Goetheplatz", "Mozartsplatz"], c: 1 },
-    { q: "Woher wusste ich dass du ein zweites Date willst?", a: ["Du hast es mir direkt gesagt", "Subtle Hints", "Du hast den klassischen I-forgot-my-Shirt Trick ausgepackt"], c: 2 },
-    { q: "Welchen Film haben wir als erstes zusammen gesehen?", a: ["Midnight in Paris", "Fight Club", "Kill Bill"], c: 0 }
+    {
+      q: "Wie heißt die Station an der wir zum ersten Mal zusammen U-Bahn gefahren sind?",
+      a: ["Schillerstraße", "Goetheplatz", "Mozartsplatz"],
+      c: 1
+    },
+    {
+      q: "Woher wusste ich dass du ein zweites Date willst?",
+      a: [
+        "Du hast es mir direkt gesagt",
+        "Subtle Hints",
+        "Du hast den klassischen I-forgot-my-Shirt Trick ausgepackt"
+      ],
+      c: 2
+    },
+    {
+      q: "Welchen Film haben wir als erstes zusammen gesehen?",
+      a: ["Midnight in Paris", "Fight Club", "Kill Bill"],
+      c: 0
+    }
   ],
+
   hard: [
-    { q: "Was war meine erste Nachricht?", a: ["Servus!", "Na du", "Ja Servas"], c: 2 },
-    { q: "Welche ist die erste mit Stern markierte Nachricht bei mir?", a: ["Mir tut alles weh, deswegen tut mir alles gut", "Wir können auch zusammen fegen", "Mr. Masu Fuckswell is a 30-4 year old professional barista..."], c: 0 },
-    { q: "Ist es möglich dass ich dich noch toller finden kann?", a: ["Nein", "Non", "No"], c: 2 }
+    {
+      q: "Was war meine erste Nachricht?",
+      a: ["Servus!", "Na du", "Ja Servas"],
+      c: 2
+    },
+    {
+      q: "Wie groß bin ich?",
+      a: ["1,82", "1,79", "1,84"],
+      c: 2
+    },
+    {
+      q: "Wie viele Sticker hat die Sticker Queen für uns erstellt?",
+      a: ["7", "10", "13"],
+      c: 2
+    },
+    {
+      q: "Wie oft haben wir uns schon geküsst? (Estimate)",
+      a: ["5.000", "14.400", "620.000"],
+      c: 1
+    }
   ]
 };
 
@@ -38,30 +85,40 @@ function loadQuestion() {
 
   const q = currentQuiz[currentIndex];
   document.getElementById('question').innerText = q.q;
+
   const answers = document.getElementById('answers');
   answers.innerHTML = "";
 
   q.a.forEach((text, i) => {
-    const b = document.createElement('button');
-    b.innerText = text;
-    b.className = "answer";
-    b.onclick = () => selectAnswer(i);
-    answers.appendChild(b);
+    const btn = document.createElement('button');
+    btn.innerText = text;
+    btn.className = "answer";
+    btn.onclick = () => selectAnswer(i);
+    answers.appendChild(btn);
   });
 }
 
 function selectAnswer(i) {
   const q = currentQuiz[currentIndex];
-  document.querySelectorAll('.answer')[q.c].classList.add('correct');
+  const buttons = document.querySelectorAll('.answer');
+
+  buttons[q.c].classList.add('correct');
+
   document.getElementById('feedback').innerText =
     i === q.c ? "Gut gemacht 💕" : "blame it on memory loss";
+
   document.getElementById('nextBtn').style.display = "inline-block";
 }
 
 function nextQuestion() {
   currentIndex++;
   document.getElementById('nextBtn').style.display = "none";
-  currentIndex >= currentQuiz.length ? showScreen('result') : loadQuestion();
+
+  if (currentIndex >= currentQuiz.length) {
+    showScreen('result');
+  } else {
+    loadQuestion();
+  }
 }
 
 /* ❤️ Schreibmaschine + Herz-Explosion + Vibration */
@@ -99,6 +156,6 @@ function explodeHearts() {
 
 function vibrateLove() {
   if ("vibrate" in navigator) {
-    navigator.vibrate([200, 150, 200]); // ❤️ bzz — pause — bzz
+    navigator.vibrate([200, 150, 200]); // zweimal kurzes Vibrieren ❤️
   }
 }
