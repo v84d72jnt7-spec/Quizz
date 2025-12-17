@@ -1,26 +1,31 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <title>Das große Maus & Masu Rätsel</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- START -->
 <div class="screen active" id="title">
   <h1 class="title">Das große Maus & Masu Rätsel</h1>
   <button onclick="showScreen('difficulty')">Start 💕</button>
 </div>
 
+<!-- EINSTIEG -->
 <div class="screen" id="difficulty">
-  <h2>Wähle deinen Schwierigkeitsgrad</h2>
-  <button onclick="startQuiz('easy')">🍋 Easy Lemon</button>
-  <button onclick="startQuiz('medium')">🍊 Medium Squeezy</button>
-  <button onclick="startQuiz('hard')">🌶️ Hefty Zesty</button>
+  <h2>Bist du bereit, Maus? 🐭</h2>
+  <p>Beginnen wir ganz entspannt.</p>
+  <button onclick="startQuiz('easy')">🍋 Easy Squeezy</button>
 </div>
 
+<!-- QUIZ -->
 <div class="screen" id="quiz">
   <h2 id="feedback"></h2>
   <h3 id="question"></h3>
@@ -30,12 +35,10 @@
   </button>
 </div>
 
-<div class="screen" id="result">
-  <h2>You did a great job</h2>
-  <p>since every job you do is great!</p>
-  <button onclick="showScreen('love')">Weiter 💖</button>
-</div>
+<!-- LEVEL ENDE -->
+<div class="screen" id="result"></div>
 
+<!-- FINALE -->
 <div class="screen" id="love">
   <h1 id="typewriter"></h1>
 </div>
