@@ -91,15 +91,15 @@ function showLevelComplete() {
 
   if (currentLevel === "easy") {
     text.innerText = "Easy Lemon gemeistert 🍋";
-    btn.innerText = "Weiter zu Medium 💕";
+    btn.innerText = "Weiter zu Medium Squeezy 🍊";
     btn.onclick = () => startQuiz("medium");
   } else if (currentLevel === "medium") {
     text.innerText = "Medium Squeezy bezwungen 🍊";
-    btn.innerText = "Weiter zu Hefty Zesty 🔥";
+    btn.innerText = "Weiter zu Hefty Zesty 🌶️";
     btn.onclick = () => startQuiz("hard");
   } else {
-    text.innerText = "Hefty Zesty überlebt 🌶️";
-    btn.innerText = "Good Job 🧚‍♀️";
+    text.innerText = "Good Job 🧚‍♀️";
+    btn.innerText = "There's something i wanna say to you";
     btn.onclick = () => showScreen("love");
   }
 
