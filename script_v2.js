@@ -1,4 +1,8 @@
-/* ===== PASSWORD TERMINAL ===== */
+/* =============================
+   🔐 PASSWORD TERMINAL
+============================= */
+
+const PASSWORD = "RAUFASERTAPETE";
 const terminalText = `
 Sie versuchen in einen passwortgeschützten Bereich einzudringen.
 
@@ -8,33 +12,49 @@ Falls nein, machen Sie das umgehend.
 Geben Sie anschließend das Passwort ein:
 `;
 
-let index = 0;
+let terminalIndex = 0;
 const terminalEl = document.getElementById("terminal-text");
 const inputEl = document.getElementById("password-input");
+const errorEl = document.getElementById("error");
+
+/* Beim Laden prüfen */
+document.addEventListener("DOMContentLoaded", () => {
+  const granted = localStorage.getItem("accessGranted");
+
+  if (granted === "true") {
+    showScreen("title"); // Passwort überspringen
+  } else {
+    showScreen("password-screen");
+    typeTerminal();
+  }
+});
 
 function typeTerminal() {
-  if (index < terminalText.length) {
-    terminalEl.textContent += terminalText[index++];
+  if (terminalIndex < terminalText.length) {
+    terminalEl.textContent += terminalText[terminalIndex++];
     setTimeout(typeTerminal, 35);
   } else {
     inputEl.focus();
   }
 }
-typeTerminal();
 
 function checkPassword(e) {
   if (e.key === "Enter") {
-    if (inputEl.value === "RAUFASERTAPETE") {
+    if (inputEl.value === PASSWORD) {
+      localStorage.setItem("accessGranted", "true");
       showScreen("title");
     } else {
-      document.getElementById("error").innerText =
+      errorEl.innerText =
         "Zugriff verweigert. Bitte kontaktieren Sie Ihre Maus.";
       inputEl.value = "";
     }
   }
 }
 
-/* ===== QUIZ LOGIK (wie zuvor) ===== */
+/* =============================
+   🎮 QUIZ LOGIK
+============================= */
+
 let currentQuiz = [];
 let currentIndex = 0;
 let currentLevel = "";
@@ -58,10 +78,129 @@ const quizzes = {
   ]
 };
 
+/* Navigation */
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
+
   if (id === "love") startTypewriter();
 }
 
-/* (Quiz-, Level- & Maus-Finale-Code bleibt unverändert – exakt wie zuvor) */
+function startQuiz(level) {
+  currentLevel = level;
+  currentQuiz = quizzes[level];
+  currentIndex = 0;
+  showScreen("quiz");
+  loadQuestion();
+}
+
+/* Quiz */
+function loadQuestion() {
+  document.getElementById("feedback").innerText = "";
+  document.getElementById("nextBtn").style.display = "none";
+
+  const q = currentQuiz[currentIndex];
+  document.getElementById("question").innerText = q.q;
+
+  const answers = document.getElementById("answers");
+  answers.innerHTML = "";
+
+  q.a.forEach((text, i) => {
+    const btn = document.createElement("button");
+    btn.innerText = text;
+    btn.className = "answer";
+    btn.onclick = () => selectAnswer(i);
+    answers.appendChild(btn);
+  });
+}
+
+function selectAnswer(i) {
+  const q = currentQuiz[currentIndex];
+  const buttons = document.querySelectorAll(".answer");
+
+  buttons[q.c].classList.add("correct");
+  document.getElementById("feedback").innerText =
+    i === q.c ? "Very well indeed 🤌🏻" : "blame it on memory loss";
+
+  document.getElementById("nextBtn").style.display = "inline-block";
+}
+
+function nextQuestion() {
+  currentIndex++;
+  document.getElementById("nextBtn").style.display = "none";
+
+  if (currentIndex >= currentQuiz.length) {
+    showLevelComplete();
+  } else {
+    loadQuestion();
+  }
+}
+
+/* Level Ende */
+function showLevelComplete() {
+  const result = document.getElementById("result");
+  result.innerHTML = "";
+
+  const text = document.createElement("h2");
+  const btn = document.createElement("button");
+
+  if (currentLevel === "easy") {
+    text.innerText = "Easy Squeezy gemeistert 🍋";
+    btn.innerText = "Weiter zu Medium 💕";
+    btn.onclick = () => startQuiz("medium");
+  } else if (currentLevel === "medium") {
+    text.innerText = "Medium bezwungen 🍊";
+    btn.innerText = "Weiter zu Hefty Zesty 🔥";
+    btn.onclick = () => startQuiz("hard");
+  } else {
+    text.innerText = "Hefty Zesty überlebt 🌶️";
+    btn.innerText = "Zum Finale 🐭";
+    btn.onclick = () => showScreen("love");
+  }
+
+  result.appendChild(text);
+  result.appendChild(btn);
+  showScreen("result");
+}
+
+/* =============================
+   💖 FINALE
+============================= */
+
+const loveText = "Ich liebe dich Maus <3";
+let typeIndex = 0;
+
+function startTypewriter() {
+  const el = document.getElementById("typewriter");
+  el.innerText = "";
+  typeIndex = 0;
+
+  const interval = setInterval(() => {
+    el.innerText += loveText[typeIndex++];
+    if (typeIndex >= loveText.length) {
+      clearInterval(interval);
+      explodeMice();
+      vibrateLove();
+    }
+  }, 120);
+}
+
+function explodeMice() {
+  for (let i = 0; i < 20; i++) {
+    const mouse = document.createElement("div");
+    mouse.className = "heart";
+    mouse.innerText = "🐁";
+    mouse.style.left = "50%";
+    mouse.style.top = "50%";
+    mouse.style.setProperty("--x", `${(Math.random() - 0.5) * 400}px`);
+    mouse.style.setProperty("--y", `${(Math.random() - 0.5) * 400}px`);
+    document.body.appendChild(mouse);
+    setTimeout(() => mouse.remove(), 2000);
+  }
+}
+
+function vibrateLove() {
+  if ("vibrate" in navigator) {
+    navigator.vibrate([200, 150, 200]);
+  }
+}
