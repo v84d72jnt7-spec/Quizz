@@ -3,42 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Das große Maus & Masu Rätsel</title>
+  <title>Protected Access</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- START -->
-<div class="screen active" id="title">
+<!-- 🔐 PASSWORD SCREEN -->
+<div class="screen active terminal" id="password-screen">
+  <pre id="terminal-text"></pre>
+  <input
+    type="text"
+    id="password-input"
+    placeholder="> Passwort eingeben"
+    autocomplete="off"
+    onkeydown="checkPassword(event)"
+  >
+  <p id="error"></p>
+</div>
+
+<!-- ❤️ TITEL -->
+<div class="screen" id="title">
   <h1 class="title">Das große Maus & Masu Rätsel</h1>
   <button onclick="showScreen('difficulty')">Start 💕</button>
 </div>
 
-<!-- EINSTIEG -->
+<!-- 🍋 EINSTIEG -->
 <div class="screen" id="difficulty">
   <h2>Tu es prete? 🐭</h2>
-  <p>Starten wir enstpannt.</p>
+  <p>Beginnen wir entspannt.</p>
   <button onclick="startQuiz('easy')">🍋 Easy Squeezy</button>
 </div>
 
-<!-- QUIZ -->
+<!-- ❓ QUIZ -->
 <div class="screen" id="quiz">
   <h2 id="feedback"></h2>
   <h3 id="question"></h3>
   <div id="answers"></div>
   <button id="nextBtn" onclick="nextQuestion()" style="display:none;">
-    Next Question
+    Nächste Frage 💕
   </button>
 </div>
 
-<!-- LEVEL ENDE -->
+<!-- 🏁 LEVEL ENDE -->
 <div class="screen" id="result"></div>
 
-<!-- FINALE -->
+<!-- 💖 FINALE -->
 <div class="screen" id="love">
   <h1 id="typewriter"></h1>
 </div>
