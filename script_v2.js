@@ -167,7 +167,7 @@ function showLevelComplete() {
    💖 FINALE
 ============================= */
 
-const loveText = "Ich liebe dich Maus <3";
+const loveText = "Ich liebe dich\nMaus <3";
 let typeIndex = 0;
 
 function startTypewriter() {
