@@ -172,13 +172,23 @@ let typeIndex = 0;
 
 function startTypewriter() {
   const el = document.getElementById("typewriter");
-  el.innerText = "";
+  el.innerHTML = "";
   typeIndex = 0;
 
   const interval = setInterval(() => {
     let char = loveText[typeIndex++];
-    if (char === " ") char = "\u00A0"; // 👈 FIX für Leerzeichen
-    el.innerText += char;
+
+    if (char === "\n") {
+      el.innerHTML += "<br>";
+    } else if (char === "<") {
+      el.innerHTML += "&lt;";
+    } else if (char === ">") {
+      el.innerHTML += "&gt;";
+    } else if (char === " ") {
+      el.innerHTML += "&nbsp;";
+    } else {
+      el.innerHTML += char;
+    }
 
     if (typeIndex >= loveText.length) {
       clearInterval(interval);
