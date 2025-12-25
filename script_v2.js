@@ -120,7 +120,7 @@ function selectAnswer(i) {
 
   buttons[q.c].classList.add("correct");
   document.getElementById("feedback").innerText =
-    i === q.c ? "Very well indeed 🤌🏻" : "blame it on memory loss";
+    i === q.c ? "Very well indeed 🤌🏻" : "Blame it on memory loss";
 
   document.getElementById("nextBtn").style.display = "inline-block";
 }
@@ -145,16 +145,16 @@ function showLevelComplete() {
   const btn = document.createElement("button");
 
   if (currentLevel === "easy") {
-    text.innerText = "Easy Squeezy gemeistert 🍋";
-    btn.innerText = "Weiter zu Medium 💕";
+    text.innerText = "Easy Lemon gemeistert 🍋";
+    btn.innerText = "Weiter zu Medium Squeezy 🍊";
     btn.onclick = () => startQuiz("medium");
   } else if (currentLevel === "medium") {
-    text.innerText = "Medium bezwungen 🍊";
-    btn.innerText = "Weiter zu Hefty Zesty 🔥";
+    text.innerText = "Medium Squeezy done 🍊";
+    btn.innerText = "Weiter zu Hefty Zesty 🌶️";
     btn.onclick = () => startQuiz("hard");
   } else {
     text.innerText = "Hefty Zesty überlebt 🌶️";
-    btn.innerText = "Zum Finale 🐭";
+    btn.innerText = "I wanna tell you something";
     btn.onclick = () => showScreen("love");
   }
 
