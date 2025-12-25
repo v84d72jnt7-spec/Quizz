@@ -176,7 +176,10 @@ function startTypewriter() {
   typeIndex = 0;
 
   const interval = setInterval(() => {
-    el.innerText += loveText[typeIndex++];
+    let char = loveText[typeIndex++];
+    if (char === " ") char = "\u00A0"; // 👈 FIX für Leerzeichen
+    el.innerText += char;
+
     if (typeIndex >= loveText.length) {
       clearInterval(interval);
       explodeMice();
@@ -184,7 +187,6 @@ function startTypewriter() {
     }
   }, 120);
 }
-
 function explodeMice() {
   for (let i = 0; i < 20; i++) {
     const mouse = document.createElement("div");
