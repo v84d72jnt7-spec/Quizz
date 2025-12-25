@@ -153,8 +153,8 @@ function showLevelComplete() {
     btn.innerText = "Weiter zu Hefty Zesty 🌶️";
     btn.onclick = () => startQuiz("hard");
   } else {
-    text.innerText = "Hefty Zesty überlebt 🌶️";
-    btn.innerText = "I wanna tell you something";
+    text.innerText = "Geschafft, alle Fragen überstanden 🧚‍♀️ ";
+    btn.innerText = "Now, I wanna tell you something 👈🏻👉🏻";
     btn.onclick = () => showScreen("love");
   }
 
