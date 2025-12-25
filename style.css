@@ -1,14 +1,44 @@
-/* 🌸 Grundlayout */
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #fde2ea; /* sanftes Rosa */
-  text-align: center;
-  padding: 40px;
-  color: #6b214a;
-  overflow-x: hidden;
+/* ===== TERMINAL LOGIN ===== */
+.terminal {
+  background-color: #000;
+  color: #00ff66;
+  font-family: 'Share Tech Mono', monospace;
+  padding: 20px;
+  min-height: 100vh;
 }
 
-/* Seiten */
+#terminal-text {
+  white-space: pre-wrap;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+#password-input {
+  background: none;
+  border: none;
+  border-top: 1px solid #00ff66;
+  color: #00ff66;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+#password-input::placeholder {
+  color: #00ff66;
+}
+
+#error {
+  color: #ff4d4d;
+  margin-top: 10px;
+}
+
+/* ===== ALLGEMEIN ===== */
+body {
+  margin: 0;
+}
+
 .screen {
   display: none;
 }
@@ -17,71 +47,47 @@ body {
   display: block;
 }
 
-/* 💕 Titel */
+/* ===== ROMANTISCHER TEIL ===== */
+body:not(.terminal) {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fde2ea;
+  color: #6b214a;
+  text-align: center;
+  padding: 40px;
+}
+
 .title {
   font-family: 'Dancing Script', cursive;
   font-size: 54px;
-  margin-bottom: 50px;
-  color: #8b1d4d;
 }
 
-/* Überschriften */
-h2, h3 {
-  font-weight: 400;
-}
-
-/* 🌷 Buttons */
 button {
-  font-family: 'Poppins', sans-serif;
   padding: 14px 28px;
   margin: 12px;
-  font-size: 16px;
   border-radius: 30px;
   border: none;
   background-color: #f7b2c4;
   color: #6b214a;
   cursor: pointer;
-  transition: all 0.25s ease;
 }
 
-button:hover {
-  background-color: #f39ab4;
-  transform: scale(1.04);
-}
-
-/* Antworten */
 .answer {
   display: block;
   width: 60%;
   margin: 10px auto;
 }
 
-/* Richtige Antwort */
 .correct {
   background-color: #b7e4c7 !important;
   color: #1b4332;
 }
 
-/* Feedback */
-#feedback {
-  min-height: 40px;
-  font-weight: 500;
-  margin-bottom: 10px;
+@media (max-width: 600px) {
+  .title { font-size: 38px; }
+  .answer, button { width: 90%; }
 }
 
-/* Schreibmaschinen-Cursor */
-#typewriter::after {
-  content: "|";
-  margin-left: 4px;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
-}
-
-/* ❤️ Herz-Explosion */
+/* ===== MAUS EXPLOSION ===== */
 .heart {
   position: fixed;
   font-size: 26px;
@@ -90,29 +96,9 @@ button:hover {
 }
 
 @keyframes explode {
-  0% {
-    transform: scale(0) translate(0,0);
-    opacity: 1;
-  }
-  100% {
+  from { transform: scale(0); opacity: 1; }
+  to {
     transform: scale(1.4) translate(var(--x), var(--y));
     opacity: 0;
-  }
-}
-
-/* 📱 Mobile Optimierung */
-@media (max-width: 600px) {
-  .title {
-    font-size: 38px;
-  }
-
-  button,
-  .answer {
-    width: 90%;
-    font-size: 16px;
-  }
-
-  body {
-    padding: 20px;
   }
 }
